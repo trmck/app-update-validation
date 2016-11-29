@@ -16,9 +16,9 @@ namespace AppUpdateSample.Utilities
 
         private StoreContext _storeContext;
 
-        public event DownloadProgressEventHandler OnDownloadProgress;
+        public static event DownloadProgressEventHandler OnDownloadProgress;
 
-        private UpdateManager() { }
+        public static int PendingUpdatesCount { private set; get; }
 
         public static UpdateManager shared
         {
@@ -32,6 +32,8 @@ namespace AppUpdateSample.Utilities
                 return _instance;
             }
         }
+
+        private UpdateManager() { }
 
         private static void InitStoreContext()
         {
@@ -47,7 +49,8 @@ namespace AppUpdateSample.Utilities
 
             IEnumerable<StorePackageUpdate> updates = await UpdateManager.shared._storeContext.GetAppAndOptionalStorePackageUpdatesAsync();
 
-            System.Diagnostics.Debug.WriteLine("Found " + updates.Count() + " available updates");
+            UpdateManager.PendingUpdatesCount = updates.Count();
+            System.Diagnostics.Debug.WriteLine("Found " + UpdateManager.PendingUpdatesCount + " available updates");
             foreach (StorePackageUpdate update in updates)
             {
                 System.Diagnostics.Debug.WriteLine("Found an update for the following package: " + update.Package.Description);
@@ -67,7 +70,7 @@ namespace AppUpdateSample.Utilities
             downloadOperation.Progress = (asyncInfo, progress) =>
             {
                 LogProgress(progress);
-                UpdateManager.shared.OnDownloadProgress(progress);
+                UpdateManager.OnDownloadProgress(progress);
             };
 
             StorePackageUpdateResult result = await downloadOperation.AsTask();

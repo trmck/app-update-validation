@@ -19,8 +19,8 @@
         <TextBlock x:Name="systemVersion" Margin="0,105,10,0" TextWrapping="Wrap" Text="{}{System Version}" VerticalAlignment="Top" FontSize="10.667" HorizontalAlignment="Right" Width="165"/>
         <TextBlock x:Name="azureId" HorizontalAlignment="Right" Margin="0,124,10,0" TextWrapping="Wrap" Text="{}{Azure Id}" VerticalAlignment="Top" FontSize="10.667" Width="165"/>
 
-        <StackPanel Background="Green" VerticalAlignment="Bottom">
-            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Updated!" VerticalAlignment="Top" Foreground="Black" SelectionHighlightColor="#FF6B0B0B" />
+        <StackPanel x:Name="updateStatusBar" Background="Orange" VerticalAlignment="Bottom">
+            <TextBlock x:Name="updateStatusText" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Click 'Check for Updates'" VerticalAlignment="Top" Foreground="White" SelectionHighlightColor="#FF6B0B0B" />
         </StackPanel>
         <Button x:Name="checkUpdatesButton" Content="Check for Updates" HorizontalAlignment="Left" Margin="10,0,0,63" VerticalAlignment="Bottom" Width="165" Click="CheckUpdateButton_Click" Height="32"/>
     </Grid>

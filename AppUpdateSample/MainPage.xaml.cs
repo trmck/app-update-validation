@@ -1,5 +1,7 @@
 ﻿using AppUpdateSample.Utilities;
+using Windows.UI;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -22,7 +24,7 @@ namespace AppUpdateSample
             systemFamily.Text = ApplicationData.SystemFamily;
             systemVersion.Text = ApplicationData.SystemVersion;
 
-            UpdateManager.shared.OnDownloadProgress += UpdateManager_OnDownloadProgress;
+            UpdateManager.OnDownloadProgress += UpdateManager_OnDownloadProgress;
         }
 
         private void EnableCheckUpdateButton(bool enabled)
@@ -56,6 +58,18 @@ namespace AppUpdateSample
         {
             EnableCheckUpdateButton(false);
             var updates = await UpdateManager.CheckUpdatesAsync();
+
+            if(UpdateManager.PendingUpdatesCount == 0)
+            {
+                updateStatusBar.Background = new SolidColorBrush(Colors.Green);
+                updateStatusText.Text = "App is up to date!";
+            }
+            else
+            {
+                updateStatusBar.Background = new SolidColorBrush(Colors.Red);
+                updateStatusText.Text = "App has " + UpdateManager.PendingUpdatesCount + " pending update(s).";
+            }
+
             bool updatesDownloaded = await UpdateManager.DownloadPackageUpdatesAsync(updates);
             if(updatesDownloaded)
             {
