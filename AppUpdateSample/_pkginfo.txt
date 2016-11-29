@@ -1,0 +1,1 @@
+C:\Users\trmck\Documents\Visual Studio 2015\Projects\AppUpdateSample\AppPackages\AppUpdateSample_2.0.3.0\AppUpdateSample_2.0.3.0_x86_x64_arm.appxbundle
