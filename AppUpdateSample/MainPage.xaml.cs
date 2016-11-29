@@ -80,6 +80,7 @@ namespace AppUpdateSample
                     System.Diagnostics.Debug.WriteLine(update);
                 }
             }
+            EnableCheckUpdateButton(true);
         }
     }
 }
