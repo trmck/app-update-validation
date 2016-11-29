@@ -90,6 +90,15 @@ namespace AppUpdateSample.Utilities
             return success;
         }
 
+        public static async Task<StorePackageUpdateState> InstallPackageUpdatesAsync(IEnumerable<StorePackageUpdate> updates)
+        {
+            IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> installOperation = shared._storeContext.RequestDownloadAndInstallStorePackageUpdatesAsync(updates);
+
+            StorePackageUpdateResult result = await installOperation.AsTask();
+
+            return result.OverallState;
+        }
+
         private static void LogProgress(StorePackageUpdateStatus progress)
         {
             string packageName = progress.PackageFamilyName;

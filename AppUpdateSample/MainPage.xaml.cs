@@ -79,6 +79,8 @@ namespace AppUpdateSample
                     var update = enumerator.Current;
                     System.Diagnostics.Debug.WriteLine(update);
                 }
+
+                await UpdateManager.InstallPackageUpdatesAsync(updates);
             }
             EnableCheckUpdateButton(true);
         }
